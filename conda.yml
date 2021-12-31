@@ -1,0 +1,19 @@
+name: udacity-mldevops-proj3
+channels:
+        - conda-forge
+        - defaults
+dependencies:
+        - python==3.8
+        - numpy
+        - pandas
+        - scikit-learn
+        - pytest
+        - requests
+        - pip
+        - dvc[s3]
+        - fastapi==0.63.0
+        - uvicorn
+        - gunicorn
+        - jupyter
+        - jupyterlab
+        - pandas-profiling
