@@ -1,5 +1,6 @@
 import pandas as pd
 
+
 def clean_data(filepath: str) -> pd.DataFrame:
     """ Initial cleaning of the raw census data.
 
@@ -10,7 +11,7 @@ def clean_data(filepath: str) -> pd.DataFrame:
     ------
     filepath : str
         Filepath of the raw census dataset
-    
+
     Returns
     -------
     df : pd.DataFrame
