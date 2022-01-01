@@ -17,3 +17,4 @@ dependencies:
         - jupyter
         - jupyterlab
         - pandas-profiling==0.3.0
+        - flake8
