@@ -16,4 +16,4 @@ dependencies:
         - gunicorn
         - jupyter
         - jupyterlab
-        - pandas-profiling
+        - pandas-profiling==0.3.0
