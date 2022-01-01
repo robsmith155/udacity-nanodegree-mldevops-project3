@@ -1,0 +1,15 @@
+schema: '2.0'
+stages:
+  clean_data:
+    cmd: python mlp/clean_data.py
+    deps:
+    - path: data/census.csv
+      md5: 145de00f6e6053d3f7044628f9a5b5ff
+      size: 3974474
+    - path: mlp/clean_data.py
+      md5: 17948e5980ffac83c4e0d55fadb0d0c1
+      size: 774
+    outs:
+    - path: data/census_cleaned.csv
+      md5: c897e4fa823a57e01bdfa17caa8d6478
+      size: 3468744
