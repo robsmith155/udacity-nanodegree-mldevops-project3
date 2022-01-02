@@ -7,8 +7,8 @@ stages:
       md5: 145de00f6e6053d3f7044628f9a5b5ff
       size: 3974474
     - path: mlp/clean_data.py
-      md5: 17948e5980ffac83c4e0d55fadb0d0c1
-      size: 774
+      md5: 050ab3f6660749475a58a2399c232a74
+      size: 758
     outs:
     - path: data/census_cleaned.csv
       md5: c897e4fa823a57e01bdfa17caa8d6478
