@@ -1,40 +1,19 @@
-from sklearn.metrics import fbeta_score, precision_score, recall_score
+from 
 
 
-def compute_model_metrics(y, preds):
+def save_model(model, output_filepath: str) -> None:
     """
-    Validates the trained machine learning model using precision, recall, and F1.
+    Save the trained model to the specified filepath.
 
     Inputs
     ------
-    y : np.array
-        Known labels, binarized.
-    preds : np.array
-        Predicted labels, binarized.
+    model : np.array
+        Trained Scikit Learn model.
+    output_filepath : str
+        File path to save the model.
     Returns
     -------
-    precision : float
-    recall : float
-    fbeta : float
+    None
     """
-    fbeta = fbeta_score(y, preds, beta=1, zero_division=1)
-    precision = precision_score(y, preds, zero_division=1)
-    recall = recall_score(y, preds, zero_division=1)
-    return precision, recall, fbeta
+    
 
-
-def inference(model, X):
-    """ Run model inferences and return the predictions.
-
-    Inputs
-    ------
-    model : ???
-        Trained machine learning model.
-    X : np.array
-        Data used for prediction.
-    Returns
-    -------
-    preds : np.array
-        Predictions from the model.
-    """
-    pass

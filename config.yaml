@@ -3,3 +3,28 @@ data:
     filepath: 'data/census.csv' 
   cleaned:
     filepath: 'data/census_cleaned.csv'
+data_processing:
+  cat_features:
+    - workclass
+    - education
+    - marital-status
+    - occupation
+    - relationship
+    - race
+    - sex
+    - native-country
+  test_size: 0.2
+  label: salary
+  random_seed: 155
+  encoder_filepath: models/encoder.pkl
+  binarizer_filepath: models/label_binarizer.pkl
+models:
+  random_seed: 155
+  random_forest:
+    output_filepath: models/random_forest_classifier.pkl
+    n_estimators: 140
+    min_samples_split: 25
+    min_samples_leaf: 1
+    max_features: sqrt
+    max_depth: 42
+    bootstrap: False
