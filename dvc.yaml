@@ -6,3 +6,12 @@ stages:
     - mlp/clean_data.py
     outs:
     - data/census_cleaned.csv
+  train_model:
+    cmd: python mlp/train_model.py
+    deps:
+    - data/census_cleaned.csv
+    - mlp/train_model.py
+    outs:
+    - models/encoder.pkl
+    - models/label_binarizer.pkl
+    - models/random_forest_classifier.pkl

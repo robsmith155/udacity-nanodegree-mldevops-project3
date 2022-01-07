@@ -13,3 +13,22 @@ stages:
     - path: data/census_cleaned.csv
       md5: c897e4fa823a57e01bdfa17caa8d6478
       size: 3468744
+  train_model:
+    cmd: python mlp/train_model.py
+    deps:
+    - path: data/census_cleaned.csv
+      md5: c897e4fa823a57e01bdfa17caa8d6478
+      size: 3468744
+    - path: mlp/train_model.py
+      md5: 89cf9a574b9aee4853d9eeac0a8ac8d5
+      size: 1789
+    outs:
+    - path: models/encoder.pkl
+      md5: bf2ff107b5ddcf1632e3b1e2dae74416
+      size: 1804
+    - path: models/label_binarizer.pkl
+      md5: bbbe07b7e8b00e4c79796f8d7428c74f
+      size: 358
+    - path: models/random_forest_classifier.pkl
+      md5: b8c88462ebc7b569b4a036eac55e1f04
+      size: 54805506
