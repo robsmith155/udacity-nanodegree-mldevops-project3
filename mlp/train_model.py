@@ -13,6 +13,7 @@ sys.path.insert(0, cwd)
 import mlp
 from mlp.processing.data import process_data
 from mlp.models.random_forest import train_model
+from mlp.models.utils import save_model
 
 # Project Directories
 PACKAGE_ROOT = Path(mlp.__file__).resolve().parent
@@ -51,10 +52,9 @@ def run_train_model() -> None:
     model = train_model(X_train, y_train, config)
 
     # Save model and encoder
-    #with open(config.data_processing.encoder_filepath, 'wb') as f:
-    pickle.dump(encoder, open(config.data_processing.encoder_filepath, 'wb'))
-    pickle.dump(lb, open(config.data_processing.binarizer_filepath, 'wb'))
-    pickle.dump(model, open(config.models.random_forest.output_filepath, 'wb'))
+    save_model(model=encoder, output_filepath=config.data_processing.encoder_filepath)
+    save_model(model=lb, output_filepath=config.data_processing.binarizer_filepath)
+    save_model(model=model, output_filepath=config.models.random_forest.output_filepath)
 
 if __name__ == '__main__':
     run_train_model()

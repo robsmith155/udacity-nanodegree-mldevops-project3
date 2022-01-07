@@ -1,4 +1,4 @@
-from 
+import pickle
 
 
 def save_model(model, output_filepath: str) -> None:
@@ -7,13 +7,13 @@ def save_model(model, output_filepath: str) -> None:
 
     Inputs
     ------
-    model : np.array
-        Trained Scikit Learn model.
+    model : 
+        Trained Scikit Learn model or Imbalanced-learn model.
     output_filepath : str
         File path to save the model.
     Returns
     -------
     None
     """
-    
+    pickle.dump(model, open(output_filepath, 'wb'))
 
