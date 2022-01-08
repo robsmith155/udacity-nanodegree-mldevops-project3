@@ -30,3 +30,6 @@ models:
     max_features: sqrt
     max_depth: 42
     bootstrap: False
+  metrics:
+    slice_filepath: outputs/slice_output.csv
+    all_filepath: outputs/all_output.csv
