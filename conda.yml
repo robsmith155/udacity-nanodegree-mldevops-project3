@@ -19,3 +19,5 @@ dependencies:
         - pandas-profiling==0.3.0
         - flake8
         - imbalanced-learn
+        - python-box
+        - pyyaml
