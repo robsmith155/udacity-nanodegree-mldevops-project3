@@ -9,3 +9,4 @@ gunicorn
 dvc[s3]
 python-box
 pyyaml
+imbalanced-learn
