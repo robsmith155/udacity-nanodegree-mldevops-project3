@@ -17,3 +17,14 @@ stages:
     - models/encoder.pkl
     - models/label_binarizer.pkl
     - models/random_forest_classifier.pkl
+  evaluate_model:
+    cmd: python mlp/evaluate_slices.py
+    deps:
+    - mlp/evaluate_slices.py
+    - models/encoder.pkl
+    - models/label_binarizer.pkl
+    - models/random_forest_classifier.pkl
+    outs:
+    - outputs/slice_output.csv
+    - outputs/test_data_metrics.txt
+    - outputs/training_data_metrics.txt

@@ -38,3 +38,28 @@ stages:
     - path: models/random_forest_classifier.pkl
       md5: a742ce384630b3eb1d4f177aafcf0250
       size: 54238306
+  evaluate_model:
+    cmd: python mlp/evaluate_slices.py
+    deps:
+    - path: mlp/evaluate_slices.py
+      md5: 760c0f90555623b3f9b4c481caf87abe
+      size: 4347
+    - path: models/encoder.pkl
+      md5: bf2ff107b5ddcf1632e3b1e2dae74416
+      size: 1804
+    - path: models/label_binarizer.pkl
+      md5: bbbe07b7e8b00e4c79796f8d7428c74f
+      size: 358
+    - path: models/random_forest_classifier.pkl
+      md5: a742ce384630b3eb1d4f177aafcf0250
+      size: 54238306
+    outs:
+    - path: outputs/slice_output.csv
+      md5: be3b03c56bde999b7a36cef6dd13fb7c
+      size: 6449
+    - path: outputs/test_data_metrics.txt
+      md5: 87fa65291c5590999c651c5eb865bf84
+      size: 92
+    - path: outputs/training_data_metrics.txt
+      md5: b6c7047151688fc9cc6a9586b34a2365
+      size: 90
