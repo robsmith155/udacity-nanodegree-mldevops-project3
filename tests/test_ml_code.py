@@ -11,6 +11,10 @@ import yaml
 from box import Box
 import sys
 from pathlib import Path
+import pytest
+import pandas as pd
+from sklearn.model_selection import train_test_split
+import numpy as np
 
 cwd = str(Path(__file__).resolve().parents[1])
 sys.path.insert(0, cwd)
@@ -41,6 +45,10 @@ logging.basicConfig(
 RAW_DATA_FILEPATH = ROOT / config.data.raw.filepath
 CLEANED_DATA_FILEPATH = ROOT / config.data.cleaned.filepath
 
+@pytest.fixture(scope="session")
+def df_clean():
+    df = pd.read_csv(CLEANED_DATA_FILEPATH)
+    return df
 
 def test_clean_data() -> None:
     """
@@ -64,6 +72,7 @@ def test_clean_data() -> None:
     except AssertionError as err:
         logging.error(f'Testing clean_data: After cleaning the dataset has {len(df_clean)} which is outside the expected range.')
         raise err
+
     # Ensure the number of columns is unchanged
     try:
         assert len(df_clean.columns) == 15
@@ -71,5 +80,45 @@ def test_clean_data() -> None:
     except AssertionError as err:
         logging.error(f'Testing clean_data: The cleaned dataset has {len(df_clean.columns)} but expected 15.')
         raise err
+
+
+def test_process_data_training(df_clean) -> None:
+    """
+    Test that the process_data function works as expected
+    """
+    train, _ = train_test_split(df_clean, test_size=0.20)
+    # Process the training data
+    X_train, y_train, encoder, lb = process_data(
+        X=train, 
+        categorical_features=config.data_processing.cat_features,
+        label=config.data_processing.label,
+        training=True
+    )
+
+    # Check that the output data are arrays
+    try:
+        assert isinstance(X_train, np.ndarray)
+        assert isinstance(y_train, np.ndarray)
+        logging.info('Testing process_data: Output data are Numpy arrays')
+    except AssertionError as err:
+        logging.error(f'Testing process_data: Expected output data to be Numpy arrays but they are {type(X_train)} and {type(y_train)}')
+
+    # Check the correct number of columns created
+    try:
+        assert X_train.shape[1] == 105
+        logging.info(f'Testing process_data: The processed data has {X_train.shape[1]} columns as expected.')
+    except AssertionError as err:
+        logging.error(f'Testing process_data: Expected 105 columns but found {X_train.shape[1]}')
+        raise err
+    
+    # Check that y is rank 1
+    try:
+        assert y_train.ndim == 1
+        logging.info('Testing process_data: y_train has rank of 1')
+    except AssertionError as err:
+        logging.error('Testing process_data: Expected rank of y_train to be 1, but got {y_train.dim}.')
+        raise err
+
+
 if __name__ == "__main__":
     test_clean_data()
