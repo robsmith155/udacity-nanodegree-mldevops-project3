@@ -6,6 +6,7 @@ import yaml
 from box import Box
 import pandas as pd
 from sklearn.model_selection import train_test_split
+import numpy as np
 
 cwd = str(Path(__file__).resolve().parents[1])
 sys.path.insert(0, cwd)
@@ -51,10 +52,19 @@ def run_train_model() -> None:
     # Train model.
     model = train_model(X_train, y_train, config)
 
-    # Save model and encoder
+    # Save model and encoders
     save_model(model=encoder, output_filepath=config.data_processing.encoder_filepath)
     save_model(model=lb, output_filepath=config.data_processing.binarizer_filepath)
     save_model(model=model, output_filepath=config.models.random_forest.output_filepath)
+
+    # Save processed data
+    with open(config.data_processing.train_filepath, 'wb') as f:
+        np.save(f, X_train)
+        np.save(f, y_train)
+
+    with open(config.data_processing.test_filepath, 'wb') as f:
+        np.save(f, X_test)
+        np.save(f, y_test) 
 
 if __name__ == '__main__':
     run_train_model()
