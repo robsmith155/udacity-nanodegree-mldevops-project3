@@ -14,13 +14,16 @@ from pathlib import Path
 import pytest
 import pandas as pd
 from sklearn.model_selection import train_test_split
+from sklearn.exceptions import NotFittedError
 import numpy as np
+import imblearn
 
 cwd = str(Path(__file__).resolve().parents[1])
 sys.path.insert(0, cwd)
 
 import mlp
 from mlp.processing.data import clean_data, process_data
+from mlp.models.random_forest import train_model
 
 # Project Directories
 PACKAGE_ROOT = Path(mlp.__file__).resolve().parent
@@ -44,11 +47,26 @@ logging.basicConfig(
 
 RAW_DATA_FILEPATH = ROOT / config.data.raw.filepath
 CLEANED_DATA_FILEPATH = ROOT / config.data.cleaned.filepath
+TRAINING_DATA_FILEPATH = ROOT / config.data_processing.train_filepath
+
 
 @pytest.fixture(scope="session")
 def df_clean():
     df = pd.read_csv(CLEANED_DATA_FILEPATH)
     return df
+
+@pytest.fixture(scope="session")
+def training_x():
+    with open(TRAINING_DATA_FILEPATH, 'rb') as f:
+        X_train = np.load(f)
+    return X_train
+
+@pytest.fixture(scope="session")
+def training_y():
+    with open(TRAINING_DATA_FILEPATH, 'rb') as f:
+        X_train = np.load(f)
+        y_train = np.load(f)
+    return y_train
 
 def test_clean_data() -> None:
     """
@@ -103,20 +121,36 @@ def test_process_data_training(df_clean) -> None:
     except AssertionError as err:
         logging.error(f'Testing process_data: Expected output data to be Numpy arrays but they are {type(X_train)} and {type(y_train)}')
 
-    # Check the correct number of columns created
-    try:
-        assert X_train.shape[1] == 105
-        logging.info(f'Testing process_data: The processed data has {X_train.shape[1]} columns as expected.')
-    except AssertionError as err:
-        logging.error(f'Testing process_data: Expected 105 columns but found {X_train.shape[1]}')
-        raise err
-    
     # Check that y is rank 1
     try:
         assert y_train.ndim == 1
         logging.info('Testing process_data: y_train has rank of 1')
     except AssertionError as err:
         logging.error('Testing process_data: Expected rank of y_train to be 1, but got {y_train.dim}.')
+        raise err
+
+
+def test_train_model(training_x, training_y) -> None:
+    """
+    Test that the train_model function performs as expected
+    """
+
+    model = train_model(training_x, training_y, config)
+
+    # Verify the model type
+    try:
+        assert isinstance(model, imblearn.ensemble._forest.BalancedRandomForestClassifier)
+        logging.info('Testing train_model: The model is the correct type.')
+    except AssertionError as err:
+        logging.error(f'Testing train_model: Expected the model to be of the type BalancedRandomForestClassifier but got {type(model)}.')
+        raise err
+
+    # Verify that the model has been fitted
+    try:
+        model.predict(training_x)
+        logging.info('Testing train_model: Model has been fitted.')
+    except NotFittedError as err:
+        logging.error('Testing train_model: The model has not been fitted.')
         raise err
 
 
