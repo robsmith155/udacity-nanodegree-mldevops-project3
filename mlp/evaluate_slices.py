@@ -25,7 +25,8 @@ with open(CONFIG_FILEPATH, "r", encoding='utf-8') as ymlfile:
 
 CLEANED_DATA_FILEPATH = ROOT / config.data.cleaned.filepath
 SLICE_OUTPUT_FILEPATH = ROOT / config.models.metrics.slice_filepath
-ALL_OUTPUT_FILEPATH = ROOT / config.models.metrics.all_filepath
+ALL_TRAINING_OUTPUT_FILEPATH = ROOT / config.models.metrics.all_train_filepath
+ALL_TEST_OUTPUT_FILEPATH = ROOT / config.models.metrics.all_test_filepath
 
 def run_evaluate_slice_scores() -> None:
     """
@@ -73,6 +74,45 @@ def run_evaluate_slice_scores() -> None:
 
     all_scores_df.to_csv(SLICE_OUTPUT_FILEPATH)
 
+def run_evaluate_all() -> None:
+    """
+    Output the performance metrics for all data for both the training and test
+    datasets.
+    """
+    train_data_filepath = config.data_processing.train_filepath
+    test_data_filepath = config.data_processing.test_filepath
+    model_filepath = config.models.random_forest.output_filepath
+
+    with open(train_data_filepath, 'rb') as f:
+        X_train = np.load(f)
+        y_train = np.load(f)
+    
+    with open(test_data_filepath, 'rb') as f:
+        X_test = np.load(f)
+        y_test = np.load(f)
+
+    model = pickle.load(open(model_filepath, 'rb'))
+
+    # Make predictions and score
+    train_preds = inference(model=model, X=X_train)
+    test_preds = inference(model=model, X=X_test)
+    train_scores = compute_model_metrics(y=y_train, preds=train_preds)
+    test_scores = compute_model_metrics(y=y_test, preds=test_preds)
+
+    # Save results
+    train_results = {'precision': train_scores[0],
+                     'recall': train_scores[1],
+                     'fbeta': train_scores[2]}
+
+    test_results = {'precision': test_scores[0],
+                    'recall': test_scores[1],
+                    'fbeta': test_scores[2]}
+
+    with open(ALL_TRAINING_OUTPUT_FILEPATH, 'w') as f:
+        f.write(str(train_results))
+    with open(ALL_TEST_OUTPUT_FILEPATH, 'w') as f:
+        f.write(str(test_results))
 
 if __name__ == '__main__':
     run_evaluate_slice_scores()
+    run_evaluate_all()
