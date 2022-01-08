@@ -1,2 +1,4 @@
 /census.csv
 /census_cleaned.csv
+/train.npy
+/test.npy

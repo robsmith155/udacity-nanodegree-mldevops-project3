@@ -12,6 +12,8 @@ stages:
     - data/census_cleaned.csv
     - mlp/train_model.py
     outs:
+    - data/train.npy
+    - data/test.npy
     - models/encoder.pkl
     - models/label_binarizer.pkl
     - models/random_forest_classifier.pkl
