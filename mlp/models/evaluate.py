@@ -1,22 +1,16 @@
-import sys
-from pathlib import Path
-from sklearn.metrics import fbeta_score, precision_score, recall_score
-import pandas as pd
-import numpy as np
 from typing import Tuple
+
 import imblearn
-
-cwd = str(Path(__file__).resolve().parents[1])
-sys.path.insert(0, cwd)
-
-import mlp
-from mlp.processing.data import clean_data, process_data
-from mlp.models.random_forest import train_model
+import numpy as np
+from sklearn.metrics import fbeta_score, precision_score, recall_score
 
 
-def compute_model_metrics(y: np.ndarray, preds: np.ndarray) -> Tuple[float, float, float]:
+def compute_model_metrics(
+    y: np.ndarray, preds: np.ndarray
+) -> Tuple[float, float, float]:
     """
-    Validates the trained machine learning model using precision, recall, and F1.
+    Validates the trained machine learning model using precision,
+    recall, and F1.
 
     Inputs
     ------
@@ -36,8 +30,11 @@ def compute_model_metrics(y: np.ndarray, preds: np.ndarray) -> Tuple[float, floa
     return precision, recall, fbeta
 
 
-def inference(model: imblearn.ensemble._forest.BalancedRandomForestClassifier , X: np.ndarray) -> np.ndarray:
-    """ Run model inferences and return the predictions.
+def inference(
+    model: imblearn.ensemble._forest.BalancedRandomForestClassifier,
+    X: np.ndarray,
+) -> np.ndarray:
+    """Run model inferences and return the predictions.
 
     Inputs
     ------

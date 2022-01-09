@@ -7,7 +7,7 @@ def save_model(model, output_filepath: str) -> None:
 
     Inputs
     ------
-    model : 
+    model :
         Trained Scikit Learn model or Imbalanced-learn model.
     output_filepath : str
         File path to save the model.
@@ -15,5 +15,4 @@ def save_model(model, output_filepath: str) -> None:
     -------
     None
     """
-    pickle.dump(model, open(output_filepath, 'wb'))
-
+    pickle.dump(model, open(output_filepath, "wb"))

@@ -1,7 +1,8 @@
-import yaml
-from box import Box
 import sys
 from pathlib import Path
+
+import yaml
+from box import Box
 
 cwd = str(Path(__file__).resolve().parents[1])
 sys.path.insert(0, cwd)
@@ -15,7 +16,7 @@ ROOT = PACKAGE_ROOT.parent
 CONFIG_FILEPATH = ROOT / "config.yaml"
 
 # Load config file
-with open(CONFIG_FILEPATH, "r", encoding='utf-8') as ymlfile:
+with open(CONFIG_FILEPATH, "r", encoding="utf-8") as ymlfile:
     config = Box(yaml.safe_load(ymlfile))
 
 RAW_DATA_FILEPATH = ROOT / config.data.raw.filepath
@@ -27,6 +28,5 @@ def run_data_cleaning() -> None:
     df_clean.to_csv(CLEANED_DATA_FILEPATH)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     run_data_cleaning()
-
