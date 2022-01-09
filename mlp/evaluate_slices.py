@@ -40,7 +40,7 @@ def run_evaluate_slice_scores() -> None:
     binarizer_filepath = config.data_processing.binarizer_filepath
     model_filepath = config.models.random_forest.output_filepath
 
-    clean_df = pd.read_csv(CLEANED_DATA_FILEPATH)
+    clean_df = pd.read_csv(CLEANED_DATA_FILEPATH).drop(['Unnamed: 0'],axis=1)
     ohe_encoder = pickle.load(open(ohe_encoder_filepath, 'rb'))
     label_binarizer = pickle.load(open(binarizer_filepath, 'rb'))
     model = pickle.load(open(model_filepath, 'rb'))

@@ -52,7 +52,7 @@ TRAINING_DATA_FILEPATH = ROOT / config.data_processing.train_filepath
 
 @pytest.fixture(scope="session")
 def df_clean():
-    df = pd.read_csv(CLEANED_DATA_FILEPATH)
+    df = pd.read_csv(CLEANED_DATA_FILEPATH).drop(['Unnamed: 0'],axis=1)
     return df
 
 @pytest.fixture(scope="session")

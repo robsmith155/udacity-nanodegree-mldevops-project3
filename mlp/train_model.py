@@ -29,7 +29,7 @@ CLEANED_DATA_FILEPATH = ROOT / config.data.cleaned.filepath
 
 def run_train_model() -> None:
     # Load data
-    data = pd.read_csv(CLEANED_DATA_FILEPATH)
+    data = pd.read_csv(CLEANED_DATA_FILEPATH).drop(['Unnamed: 0'],axis=1)
     train, test = train_test_split(data, test_size=0.20, random_state=config.models.random_seed)
 
     # Process the training and test data
