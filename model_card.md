@@ -51,25 +51,26 @@ The `precision`, `recall`, and `F1` metrics were used to evaluate the model.
 
 ### Training data scores (all)
 - precision: 0.626
-- recall: 0.910
-- F1: 0.742
+- recall: 0.904
+- F1: 0.740
 
 ### Test data scores (all)
-- precision: 0.601
-- recall: 0.863
-- F1: 0.708
+- precision: 0.605
+- recall: 0.862
+- F1: 0.711
 
 ### Data slicing
 Metrics were also run for all unique categories in the categorical features. These results can be found in the [outputs](https://github.com/robsmith155/udacity-nanodegree-mldevops-project3/tree/main/outputs) file in the repo. An example of the results for the race category are shown below.
 
 #### F1 scores for race categories
-- White: 0.6868686868686869
-- Black: 0.7080745341614907
-- Other: 0.4
-- Amer-Indian-Eskimo: 0.6666666666666666
+- White: 0.713
+- Asian-Pac-Islander: 0.680
+- Black: 0.699
+- Other: 0.5
+- Amer-Indian-Eskimo: 0.545
 
 ## Ethical Considerations
-Care should be taken when using the model since it has not been fully assessed for bias. The data slicing metrics that were output can give us some guidance. For instance, in the results shown above, the model does significantly worse for people that fall under the `other` category compared to the other three. The model should be carefully analysed for the impact of things such as age, race and gender on the results.
+Care should be taken when using the model since it has not been fully assessed for bias. The data slicing metrics that were output can give us some guidance. For instance, in the results shown above, the model does significantly worse for people that fall under the `other` and `Amer-Indian-Eskimo` categories compared to the other three. The model should be carefully analysed for the impact of things such as age, race and gender on the results.
 
 ## Caveats and Recommendations
 The Random Forest model could likely be improved by analysing the feature importance and removing features that don't contribute to the results. The dependency between the input features could also be investigated and redundant features removed.
