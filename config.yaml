@@ -34,3 +34,13 @@ models:
     slice_filepath: outputs/slice_output.csv
     all_train_filepath: outputs/training_data_metrics.txt
     all_test_filepath: outputs/test_data_metrics.txt
+app:
+  cat_features:
+    - workclass
+    - education
+    - marital_status
+    - occupation
+    - relationship
+    - race
+    - sex
+    - native_country
