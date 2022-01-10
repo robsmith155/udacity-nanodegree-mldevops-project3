@@ -8,7 +8,7 @@ from box import Box
 from fastapi import FastAPI
 from pydantic import BaseModel, Field
 
-from mlp.models.evaluate import compute_model_metrics, inference
+from mlp.models.evaluate import inference
 from mlp.processing.data import process_data
 
 # Project Directories
@@ -148,6 +148,26 @@ class CensusData(BaseModel):
         "Hong",
         "Holand-Netherlands",
     ] = Field(alias="native-country")
+
+    class Config:
+        schema_extra = {
+            "example": {
+                "age": 52,
+                "workclass": "Self-emp-not-inc",
+                "fnlwgt": 209642,
+                "education": "HS-grad",
+                "education-num": 9,
+                "marital-status": "Married-civ-spouse",
+                "occupation": "Exec-managerial",
+                "relationship": "Husband",
+                "race": "White",
+                "sex": "Male",
+                "capital-gain": 0,
+                "capital-loss": 0,
+                "hours-per-week": 45,
+                "native-country": "United-States",
+            }
+        }
 
 
 app = FastAPI()
