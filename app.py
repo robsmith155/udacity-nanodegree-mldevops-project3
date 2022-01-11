@@ -28,6 +28,13 @@ MODEL_FILEPATH = os.path.join(
     ROOT, config.models.random_forest.output_filepath
 )
 
+# The following is needed to enable DVC to pull data on Heroku
+if "DYNO" in os.environ and os.path.isdir(".dvc"):
+    os.system("dvc config core.no_scm true")
+    if os.system("dvc pull") != 0:
+        exit("dvc pull failed")
+    os.system("rm -r .dvc .apt/usr/lib/dvc")
+
 
 class CensusData(BaseModel):
     """
