@@ -9,6 +9,7 @@ from fastapi import FastAPI
 from pydantic import BaseModel, Field
 
 from mlp.models.evaluate import inference
+from mlp.models.utils import load_model
 from mlp.processing.data import process_data
 
 # Project Directories
@@ -182,9 +183,9 @@ app = FastAPI()
 # Load objects needed to make prediction
 categorical_features = config.app.cat_features
 label = config.data_processing.label
-encoder = pickle.load(open(ENCODER_FILEPATH, "rb"))
-binarizer = pickle.load(open(BINARIZER_FILEPATH, "rb"))
-model = pickle.load(open(MODEL_FILEPATH, "rb"))
+encoder = load_model(ENCODER_FILEPATH)
+binarizer = load_model(BINARIZER_FILEPATH)
+model = load_model(MODEL_FILEPATH, "rb")
 
 
 @app.get("/")

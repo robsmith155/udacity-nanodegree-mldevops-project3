@@ -13,6 +13,7 @@ sys.path.insert(0, cwd)
 
 import mlp
 from mlp.models.evaluate import compute_model_metrics, inference
+from mlp.models.utils import load_model
 from mlp.processing.data import process_data
 
 # Project Directories
@@ -43,9 +44,9 @@ def run_evaluate_slice_scores() -> None:
     model_filepath = config.models.random_forest.output_filepath
 
     clean_df = pd.read_csv(CLEANED_DATA_FILEPATH).drop(["Unnamed: 0"], axis=1)
-    ohe_encoder = pickle.load(open(ohe_encoder_filepath, "rb"))
-    label_binarizer = pickle.load(open(binarizer_filepath, "rb"))
-    model = pickle.load(open(model_filepath, "rb"))
+    ohe_encoder = load_model(ohe_encoder_filepath)
+    label_binarizer = load_model(binarizer_filepath)
+    model = load_model(model_filepath)
 
     all_scores_df = pd.DataFrame(
         columns=[
