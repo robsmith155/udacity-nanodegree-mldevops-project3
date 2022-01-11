@@ -185,7 +185,7 @@ categorical_features = config.app.cat_features
 label = config.data_processing.label
 encoder = load_model(ENCODER_FILEPATH)
 binarizer = load_model(BINARIZER_FILEPATH)
-model = load_model(MODEL_FILEPATH, "rb")
+model = load_model(MODEL_FILEPATH)
 
 
 @app.get("/")
