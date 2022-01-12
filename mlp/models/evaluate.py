@@ -1,3 +1,11 @@
+"""
+Module to evaluate a trained model. Includes functions for 
+running inference and computing metrics.
+
+@author: Rob Smith
+Date: 12th Jan 2022
+"""
+
 from typing import Tuple
 
 import imblearn

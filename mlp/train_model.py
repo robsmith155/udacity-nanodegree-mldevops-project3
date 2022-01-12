@@ -1,4 +1,10 @@
-# Script to train machine learning model.
+"""
+Script to train a Balanced Random Forest classifier.
+
+@author: Rob Smith
+Date: 12th Jan 2022
+"""
+
 import sys
 from pathlib import Path
 

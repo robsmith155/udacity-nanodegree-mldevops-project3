@@ -1,3 +1,10 @@
+"""
+FastAPI app to deploy the trained Random Forest model.
+
+@author: Rob Smith
+Date: 12th Jan 2022
+"""
+
 import os
 import pickle
 from typing import Literal

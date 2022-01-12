@@ -1,3 +1,12 @@
+"""
+Script to evaluate metrics for slices of the data where
+categorical variables are held constant. Also outputs
+metrics for the full training and test datasets.
+
+@author: Rob Smith
+Date: 12th Jan 2022
+"""
+
 import pickle
 import sys
 from pathlib import Path

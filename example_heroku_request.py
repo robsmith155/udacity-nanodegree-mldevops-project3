@@ -1,6 +1,9 @@
-# This will send a GET and POST request to the app on Heroku
+"""
+This will send a GET and POST request to the app on Heroku
 # to check it is working. Note the app is at
 # https://robsmith155-salary-prediction.herokuapp.com/
+"""
+
 
 import json
 

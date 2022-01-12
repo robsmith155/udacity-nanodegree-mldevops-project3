@@ -3,7 +3,7 @@ This module contains tests for the functions contained withing the mlp package.
 This includes the data processing and model training code.
 
 @author: Rob Smith
-date: 8th January 2022
+Date: 8th January 2022
 """
 
 import logging

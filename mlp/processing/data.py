@@ -1,3 +1,11 @@
+"""
+Module with functions for data cleaning and processing. 
+
+@author: Rob Smith
+Date: 12th Jan 2022
+"""
+
+
 import numpy as np
 import pandas as pd
 from sklearn.preprocessing import LabelBinarizer, OneHotEncoder

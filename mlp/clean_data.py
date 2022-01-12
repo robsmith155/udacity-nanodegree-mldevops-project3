@@ -1,3 +1,10 @@
+"""
+Script to run initial data cleaning of raw data.
+
+@author: Rob Smith
+Date: 12th Jan 2022
+"""
+
 import sys
 from pathlib import Path
 

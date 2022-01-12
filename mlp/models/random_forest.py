@@ -1,3 +1,10 @@
+"""
+Module to run training of Random Forest models.
+
+@author: Rob Smith
+Date: 12th Jan 2022
+"""
+
 from imblearn.ensemble import BalancedRandomForestClassifier
 
 

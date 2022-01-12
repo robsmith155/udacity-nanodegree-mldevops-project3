@@ -1,3 +1,11 @@
+"""
+Utility module to save and load Scikit-learn or
+Imbalanced-learn models.
+
+@author: Rob Smith 
+Date: 12th Jan 2022
+"""
+
 import pickle
 
 
@@ -28,7 +36,7 @@ def load_model(model_filepath: str):
         File path to the trained model.
     Returns
     -------
-    None
+    model: Scikit-learn or Imbalanced-learn model
     """
     model = pickle.load(open(model_filepath, "rb"))
     return model
